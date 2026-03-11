@@ -1,0 +1,466 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jotavfx | Portfolio</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #171718;
+            --accent-color: #60100B;
+            --text-main: #ffffff;
+            --text-secondary: #a1a1aa;
+            --card-bg: #202021;
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 4px;
+            border: 1px solid var(--accent-color);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: rgba(23, 23, 24, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-color);
+            filter: blur(150px);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #2a2a2a;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border: 1px solid #333;
+        }
+
+        /* --- SERVICES / SKILLS --- */
+        .services {
+            padding: 100px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- PORTFOLIO --- */
+        .portfolio {
+            padding: 100px 0;
+            background-color: #121212; /* Slightly darker for contrast */
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        /* Placeholder for images */
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .project-card:hover .project-img {
+            opacity: 0.4;
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+
+        .project-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .project-info span {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        /* --- CONTACT --- */
+        .contact {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .email-box {
+            background: var(--card-bg);
+            display: inline-block;
+            padding: 40px 60px;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        .email-link {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .email-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+                /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            
+            /* Adjust Nav for Mobile */
+            nav {
+                position: relative;
+            }
+
+            .nav-links {
+                display: none; /* Hidden by default on mobile */
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-color);
+                padding: 20px;
+                border-bottom: 1px solid #333;
+                text-align: center;
+            }
+
+            .email-box { padding: 30px; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">jota<span> vfx</span></div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Work</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-tags">
+                <span class="tag">Video Editor</span>
+                <span class="tag">Motion Designer</span>
+                <span class="tag">Programmer</span>
+            </div>
+            <h1>Visuals that <br> <span style="color: var(--accent-color);">Move People.</span></h1>
+            <p>I am Jotavfx. With 3 years of experience in VFX and creative coding, I turn raw footage into compelling stories.</p>
+            <a href="#contact" class="btn">Let's Work Together</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">My <span>Expertise</span></h2>
+            <div class="grid-3">
+                <!-- Service 1 -->
+                <div class="card">
+                    <span class="icon">✂️</span>
+                    <h3>Video Editing</h3>
+                    <p>Seamless cuts, pacing, and storytelling. I specialize in high-retention editing for social media and long-form content.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="card">
+                    <span class="icon">✨</span>
+                    <h3>Motion Design</h3>
+                    <p>Bringing graphics to life. From kinetic typography to complex 2D/3D animations that explain your brand.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="card">
+                    <span class="icon">💻</span>
+                    <h3>Programming</h3>
+                    <p>Web development and creative coding. I build the digital infrastructure that showcases your visual work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Selected <span>Work</span></h2>
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <!-- Replace src with your image -->
+                    <img src="https://media.discordapp.net/attachments/1418828978193432626/1481097721841582151/Screenshot_2026-03-10_171418.png?ex=69b2133e&is=69b0c1be&hm=168ccb34e3883434a8963c85d9fcb1e2fe327f920718221ca3dc92688c5093c6&=&format=webp&quality=lossless&width=1523&height=856" alt="Project 1" class="project-img">
+                    <div class="project-info">
+                        <span>Video Editing</span>
+                        <h4>Commercial Spot</h4>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="https://media.discordapp.net/attachments/1418828978193432626/1481097721388470353/Screenshot_2026-03-10_171032.png?ex=69b2133e&is=69b0c1be&hm=5ff2dd4f4f82d4dcb9598b7f83b5c6bb10801ccd6b584efcfd7413507e4255fe&=&format=webp&quality=lossless&width=1257&height=856" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <span>Motion Design</span>
+                        <h4>Logo Animation</h4>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" alt="Project 3" class="project-img">
+                    <div class="project-info">
+                        <span>VFX / Code</span>
+                        <h4>Interactive Web</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Ready to <span>Create?</span></h2>
+            <div class="email-box">
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">Have a project in mind? Drop me a line.</p>
+                <a href="mailto:jotavfxedit@gmail.com" class="email-link">jotavfxedit@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Jotavfx. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const navLinks = document.querySelector('.nav-links');
+        const logo = document.querySelector('.logo');
+        
+        // Create Hamburger Button
+        const hamburger = document.createElement('button');
+        hamburger.innerHTML = '☰';
+        hamburger.style.display = 'none';
+        hamburger.style.background = 'transparent';
+        hamburger.style.color = 'white';
+        hamburger.style.border = 'none';
+        hamburger.style.fontSize = '1.5rem';
+        hamburger.style.cursor = 'pointer';
+        hamburger.style.marginLeft = '20px';
+
+        // Add button to nav
+        document.querySelector('nav').appendChild(hamburger);
+
+        // Toggle Logic
+        hamburger.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            hamburger.innerHTML = navLinks.style.display === 'flex' ? '✕' : '☰';
+        });
+
+        // Responsive Logic
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+                hamburger.style.display = 'none';
+            } else {
+                navLinks.style.display = 'none';
+                hamburger.style.display = 'block';
+            }
+        });
+    </script>
+</html> 
